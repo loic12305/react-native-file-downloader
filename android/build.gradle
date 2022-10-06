@@ -20,11 +20,11 @@ if (isNewArchitectureEnabled()) {
 }
 
 def getExtOrDefault(name) {
-  return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['FileDownloaderModule_' + name]
+  return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['RnFileDownloader_' + name]
 }
 
 def getExtOrIntegerDefault(name) {
-  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties['FileDownloaderModule_' + name]).toInteger()
+  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties['RnFileDownloader_' + name]).toInteger()
 }
 
 android {
@@ -112,6 +112,13 @@ repositories {
       }
     })
   }
+
+  if (!found) {
+    throw new GradleException(
+      "${project.name}: unable to locate React Native android sources. " +
+      "Ensure you have you installed React Native as a dependency in your project and try again."
+    )
+  }
 }
 
 
@@ -124,7 +131,7 @@ dependencies {
 if (isNewArchitectureEnabled()) {
   react {
     jsRootDir = file("../src/")
-    libraryName = "FileDownloaderModule"
-    codegenJavaPackageName = "com.reactnativefiledownloadermodule"
+    libraryName = "RnFileDownloader"
+    codegenJavaPackageName = "com.rnfiledownloader"
   }
 }

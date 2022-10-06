@@ -2,7 +2,7 @@
 
 Boring to try to use `rn-fetch-blob` or the fork `react-native-fetch-blob` or another fork
 
-This module provide a simply way to download file from API to Download (Android) / Documents(iOS)
+This module provide a simple way to download file from API to Download (Android) / Documents(iOS)
 
 ## Installation
 
@@ -42,11 +42,11 @@ Add this permissions in `Info.plist`
 ### Sample
 
 ```javascript
-import ReactNativeFileDownloader from 'react-native-file-downloader';
+import { downloadFile } from "rn-file-downloader";
 
 //...
 
-ReactNativeFileDownloader.downloadFile(
+downloadFile(
         'https://picsum.photos/200/300',
         'my-picture.jpg',
         JSON.stringify({

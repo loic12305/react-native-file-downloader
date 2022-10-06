@@ -1,11 +1,12 @@
-// ReactNativeFileDownloader.m
-
-#import "ReactNativeFileDownloader.h"
+#import "RnFileDownloader.h"
 #import <React/RCTLog.h>
 
-@implementation ReactNativeFileDownloader
-RCT_EXPORT_MODULE();
+#ifdef RCT_NEW_ARCH_ENABLED
+#import "RNRnFileDownloaderSpec.h"
+#endif
 
+@implementation RnFileDownloader
+RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(downloadFile:(NSString *)url
                   filename:(NSString *)filename
@@ -46,4 +47,14 @@ RCT_EXPORT_METHOD(downloadFile:(NSString *)url
         }
     }] resume];
 }
+
+// Don't compile this code when we build for the old architecture.
+#ifdef RCT_NEW_ARCH_ENABLED
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
+    (const facebook::react::ObjCTurboModule::InitParams &)params
+{
+    return std::make_shared<facebook::react::NativeRnFileDownloaderSpecJSI>(params);
+}
+#endif
+
 @end
