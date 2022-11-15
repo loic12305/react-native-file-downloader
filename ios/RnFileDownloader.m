@@ -36,11 +36,11 @@ RCT_EXPORT_METHOD(downloadFile:(NSString *)url
         NSHTTPURLResponse *httpresponse = (NSHTTPURLResponse *) response;
         long statusCode = (long)[httpresponse statusCode];
         if (!error && statusCode == 200) {
-            NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSArray   *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
             NSString  *documentsDirectory = [paths objectAtIndex:0];
             NSString  *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,filename];
             [data writeToFile:filePath atomically:YES];
-            resolve([@"/Documents/Officiels/" stringByAppendingString:filename]);
+            resolve(filePath);
         } else {
             NSLog(@"FileDownloaderRestApiModule Error téléchargement %ld", statusCode);
             reject(@"Erreur téléchargement ", @"", nil);

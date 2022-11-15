@@ -1,7 +1,6 @@
 package com.rnfiledownloader;
 
 import androidx.annotation.NonNull;
-import android.os.Environment;
 import android.util.Log;
 
 import com.facebook.react.bridge.Promise;
@@ -47,11 +46,10 @@ public class RnFileDownloaderModule extends ReactContextBaseJavaModule {
       int responseCode = connection.getResponseCode();
 
       if (responseCode == 200) {
-        Log.d("FileDownloaderModule", "Downloaded to : " + Environment.getExternalStorageDirectory().toString());
+        String absolutePath = getReactApplicationContext().getFilesDir() + filename;
+        Log.d("FileDownloaderModule", "Downloaded to : " + absolutePath);
         InputStream input = connection.getInputStream();
-        OutputStream output = new FileOutputStream(Environment
-          .getExternalStorageDirectory().toString()
-          + "/Download/" + filename);
+        OutputStream output = new FileOutputStream(absolutePath);
 
         byte[] data = new byte[2048];
 
@@ -63,8 +61,7 @@ public class RnFileDownloaderModule extends ReactContextBaseJavaModule {
         output.close();
         input.close();
 
-        promise.resolve("/Download/" + filename);
-
+        promise.resolve(absolutePath);
       }
 
     } catch (Exception e) {
