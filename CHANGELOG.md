@@ -1,3 +1,9 @@
+#### 2.0.1 (2023-06-05) [BREAKING] :warning:
+
+##### Bug Fixes
+
+* **Path:**  return the absolute path ([b7edf3f3](https://github.com/omnilog/react-native-file-downloader/commit/b7edf3f382d8ea0ac92d34ea40b7a3e0d0046c43))
+
 #### 1.1.0 (2022-10-07)
 
 ##### Refactors
